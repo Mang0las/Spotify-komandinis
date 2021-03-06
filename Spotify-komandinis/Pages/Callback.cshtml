@@ -1,0 +1,17 @@
+﻿@page
+@model Spotify_komandinis.CallbackModel
+@{
+    @*var url = (string)TempData["access_token"];
+    <div class="text-center">
+        <p>Prisijungimas sekmingas! @url</p>
+
+    </div>*@
+
+    <script>
+        $(document).ready(function () {
+             @TempData["access_token"] = @HttpContext.Request.Query["access_token"];
+                $window.location.href = "/Overview";
+
+        })
+    </script>
+}

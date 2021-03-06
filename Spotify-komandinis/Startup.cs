@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Spotify_komandinis
 {
+    // git test
     public class Startup
     {
         public Startup(IConfiguration configuration)

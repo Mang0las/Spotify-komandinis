@@ -10,13 +10,13 @@
 
 @section scripts{
     <script>
-        $(document).ready(function (){
+        $(document).ready(function () {
             $("#login-button").click(function () {
                 var parameters = "@Model.parameters";
                 parameters = parameters.replace(/&amp;/g, "&");
                 window.location.href = "https://accounts.spotify.com/authorize/".concat(parameters);
-            })
-        })
+            });
+        });
         
     </script>
     

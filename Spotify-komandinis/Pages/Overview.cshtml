@@ -2,16 +2,17 @@
 @model Spotify_komandinis.OverviewModel
 @{
 
+
     <div class="text-center">
         <p>Prisijungimas sekmingas! @TempData["access_token"]</p>
 
     </div>
 
     <div class="text-center">
-        <button id="logout-button" class="logOutButton">Log out with Spotify</button>
+        <button id="logout-button" class="logOutButton">Log out</button>
     </div>
 }
-<table>
+<table class="table table-dark">
     <thead>
         <tr>
             <th>Album</th>
@@ -36,7 +37,6 @@
         </tbody>
     </table>
 
-    }
     @section Scripts{
         <script>
             //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback

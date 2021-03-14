@@ -54,6 +54,7 @@ namespace Spotify_komandinis
                     artistList.Add(artist);
                 }
 
+
                 List<Artist> artists = artistList;
                 string id = tracks.Items[i].Id;
                 string name = tracks.Items[i].Name;

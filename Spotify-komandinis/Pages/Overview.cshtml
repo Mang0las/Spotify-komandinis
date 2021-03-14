@@ -2,24 +2,23 @@
 @model Spotify_komandinis.OverviewModel
 @{
 
+    <div class="text-center">
+        <p>Prisijungimas sekmingas! @TempData["access_token"]</p>
+
+    </div>
 
     <div class="text-center">
-        <p>Prisijungimas sekmingas!</p>
-
-    </div>
-
-    <div class="align-text-bottom">
-        <button id="logout-button" class="btn btn-primary">Log out</button>
+        <button id="logout-button" class="logOutButton">Log out with Spotify</button>
     </div>
 }
-<table class="table table-light table-striped table-hover">
+<table class="table table-light table-striped">
     <thead>
         <tr>
             <th>Album</th>
             <th>Artist</th>
-            <th>Name</th>
             <th>Popularity</th>
-            <th>Listen</th>
+            <th>Name</th>
+            <th>Play</th>
         </tr>
     </thead>
     <tbody>
@@ -30,13 +29,14 @@
             <td>@track.artist</td>
             <td>@track.name</td>
             <td>@track.popularity</td>
-            <td><iframe src="https://open.spotify.com/embed/track/@track.id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+            <td><iframe src="https://open.spotify.com/embed/track/ + @track.id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
         </tr>
         
     }
         </tbody>
     </table>
 
+    }
     @section Scripts{
         <script>
             //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback

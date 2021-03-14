@@ -28,7 +28,7 @@ namespace Spotify_komandinis
         {
             var http = new HttpClient();
             var personal = new PersonalizationApi(http, access_token);
-            var tracks = await personal.GetUsersTopTracks(10);
+            var tracks = await personal.GetUsersTopTracks(10,timeRange:TimeRange.LongTerm);
 
             //var tracks = new List<Track>();
 

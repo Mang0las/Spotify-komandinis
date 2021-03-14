@@ -19,6 +19,7 @@
             <th>Artist</th>
             <th>Name</th>
             <th>Popularity</th>
+            <th>Listen</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@
             <td>@track.artist</td>
             <td>@track.name</td>
             <td>@track.popularity</td>
+            <td><iframe src="https://open.spotify.com/embed/track/@track.id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
         </tr>
         
     }

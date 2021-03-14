@@ -3,15 +3,15 @@
 @{
 
     <div class="text-center">
-        <p>Prisijungimas sekmingas! @TempData["access_token"]</p>
+        <p>Prisijungimas sekmingas!</p>
 
     </div>
 
     <div class="text-center">
-        <button id="logout-button" class="logOutButton">Log out with Spotify</button>
+        <button id="logout-button" class="btn btn-primary">Log out with Spotify</button>
     </div>
 }
-<table class="table table-light table-striped">
+<table class="table table-light table-striped table-hover">
     <thead>
         <tr>
             <th>Album</th>
@@ -29,7 +29,7 @@
             <td>@track.artist</td>
             <td>@track.name</td>
             <td>@track.popularity</td>
-            <td><iframe src="https://open.spotify.com/embed/track/ + @track.id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+            <td><iframe src="https://open.spotify.com/embed/track/@track.id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
         </tr>
         
     }

@@ -10,17 +10,42 @@
     <div class="text-center">
         <button id="logout-button" class="logOutButton">Log out with Spotify</button>
     </div>
-    }
 }
-@section Scripts{
-<script>
-    //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
-    $(document).ready(function () {
-        $("#logout-button").click(function () {
-            window.location.href = "/Index";
-        });
-    });
+<table>
+    <thead>
+        <tr>
+            <th>Album</th>
+            <th>Artist</th>
+            <th>Popularity</th>
+            <th>Name</th>
+            <th>Play</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Track track in Model.trackList)
+        {
+        <tr>
+            <td>@track.album</td>
+            <td>@track.artist</td>
+            <td>@track.name</td>
+            <td>@track.popularity</td>
+            <td><iframe src="https://open.spotify.com/embed/track/ + @track.id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+        </tr>
+        
+    }
+        </tbody>
+    </table>
 
-</script> 
-} 
-    
+    }
+    @section Scripts{
+        <script>
+            //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
+            $(document).ready(function () {
+                $("#logout-button").click(function () {
+                    window.location.href = "/Index";
+                });
+            });
+
+        </script>
+    }
+

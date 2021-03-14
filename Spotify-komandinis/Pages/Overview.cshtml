@@ -1,11 +1,10 @@
 ﻿@page
 @model Spotify_komandinis.OverviewModel
 @{
-    var routeUrl = Url.RouteUrl(ViewContext.RouteData.Values);
-    var qsPath = ViewContext.HttpContext.Request.QueryString.Value;
-    var url = $"{routeUrl}{qsPath}";
+  
     <div class="text-center">
-        <p>Prisijungimas sekmingas! @url</p>
+        <p>Prisijungimas sekmingas! @TempData["access_token"]</p>
+        
         
         
     </div>

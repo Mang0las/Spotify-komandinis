@@ -1,5 +1,7 @@
 ﻿@page
 @model Spotify_komandinis.CallbackModel
+@*Paslepta forma, skirta patalpinti access key is javascript variable ir ji paimti Callback.cshtml.cs
+    TODO: paslepti ta submit mygtuka*@
     <form method="post" id="theForm" name="theForm" >
         <input runat="server" type='hidden' id='token' name='token' value="0" />
         <input type="submit" >
@@ -7,6 +9,7 @@
 @section Scripts{
     <script>
 
+        //Sitas script paima is adreso access token ir ji paduoda hidden elementui
         $(document).ready(function () {
             //document.getElementById("theForm").hidden(true);
             /* 13 because that bypasses 'access_token' string */
@@ -15,19 +18,12 @@
                 var accessString = hash.indexOf("&");
                 var access_token = hash.substring(13, accessString);
                 $('#token').val(access_token);
-                console.log("Access Token: " + access_token);
-                var url = new URL(window.location.href);
-                var xhr = new XMLHttpRequest();
-                document.getElementById("theForm").submit();
-                //xhr.open("POST", "https://localhost:44382/Callback", true);
-                //xhr.setRequestHeader('Content-Type', 'application/json');
-                //xhr.send(JSON.stringify({
-                //    value: access_token
+                document.getElementById("theForm").submit(); 
                            }, 1000);
 
             //setTimeout(function () {
             //    window.location.href = "/Overview";
-            //}, 4000);
+            //}, 1100);
         })
 
     </script>

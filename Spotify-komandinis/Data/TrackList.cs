@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace Spotify_komandinis
 {
-    public class MostPlayedSongs
+    public class TrackList
     {
+        public Track[] tracks { get; set; }
     }
 }

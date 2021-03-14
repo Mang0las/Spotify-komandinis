@@ -8,9 +8,7 @@
     <button id="login-button" class="logInButton">Log in with Spotify</button>
 </div>
 
-<div class="text-center">
-    <button id="logout-button" class="logOutButton">Log out with Spotify</button>
-</div>
+
 
 @section scripts{
     <script>
@@ -25,17 +23,7 @@
 
     </script>
 
-    <script>
-        //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
-        $(document).ready(function () {
-            $("#logout-button").click(function () {
-                var parameters = "@Model.parameters";
-                parameters = parameters.replace(/&amp;/g, "&");
-                window.location.href = "https://accounts.spotify.com/en/logout".concat(parameters);
-            });
-        });
-
-    </script>
+    
 
 
     }

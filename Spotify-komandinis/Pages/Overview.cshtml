@@ -4,23 +4,23 @@
 
     <div class="text-center">
         <p>Prisijungimas sekmingas! @TempData["access_token"]</p>
-        @(Model.trackList[0].artist)
-
 
     </div>
 
     <div class="text-center">
         <button id="logout-button" class="logOutButton">Log out with Spotify</button>
     </div>
-
-    <script>
-        //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
-        $(document).ready(function () {
-            $("#logout-button").click(function () {
-                window.location.href = "https://accounts.spotify.com/en/logout";
-            });
-        });
-
-    </script>
-
+    }
 }
+@section Scripts{
+<script>
+    //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
+    $(document).ready(function () {
+        $("#logout-button").click(function () {
+            window.location.href = "/Index";
+        });
+    });
+
+</script> 
+} 
+    

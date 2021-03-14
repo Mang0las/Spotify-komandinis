@@ -21,8 +21,12 @@ $(document).ready(function () {
     var hash = window.location.hash.substring(1);
     var accessString = hash.indexOf("&");
 
-    /* 13 because that bypasses 'access_token' string */
-    var access_token = hash.substring(13, accessString);
-    console.log("Access Token: " + access_token);
+/* 13 because that bypasses 'access_token' string */
+    //@Html.Hidden("token", 0);
+    //var access_token = hash.substring(13, accessString);
+    //$('token').val(access_token);
+    //console.log("Access Token: " + access_token);
+    //window.location.href = "https://localhost:44382/Overview";
+
 
 });

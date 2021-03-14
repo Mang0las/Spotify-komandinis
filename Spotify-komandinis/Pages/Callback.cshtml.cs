@@ -9,11 +9,20 @@ namespace Spotify_komandinis
 {
     public class CallbackModel : PageModel
     {
-        public IActionResult OnGet(string code, string state)
+
+        [BindProperty]
+        public string token { get; set; }
+
+        public IActionResult OnPost(string token)
         {
-            TempData["access_token"] = (string)HttpContext.Request.Query["access_token"];
+            //TempData["access_token"]
+            TempData["access_token"] = (string)Request.Form["token"];
+            TempData["access_token"] = (string)Request.Form["token"];
+
+            //var thevalue = $('#token').val();
+
             //TODO: Figure out how to put the access token into TempData, it looks like it tries to
-            //load the access token before the response, so it's just null
+            //load the access token before the response, so it's just 
             return Page();
         }
     }

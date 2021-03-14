@@ -19,7 +19,7 @@ namespace Spotify_komandinis
 
             //Console.WriteLine(test.Result.Items.Length);
             var mostPlayedTracks = await GetMostPlayedtracks(token); //sarasas dainu kurias displayint
-            Console.WriteLine("test");
+                    Console.WriteLine(mostPlayedTracks.Items[0].Album.Name);
             return Page();
         }
 

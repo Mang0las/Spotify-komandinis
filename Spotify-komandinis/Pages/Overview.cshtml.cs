@@ -13,13 +13,13 @@ namespace Spotify_komandinis
     public class OverviewModel : PageModel
     {
 
-        public IActionResult OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             string token = (string)TempData["access_token"];
 
             //Console.WriteLine(test.Result.Items.Length);
-            var mostPlayedTracks = GetMostPlayedtracks(token); //sarasas dainu kurias displayint
-
+            var mostPlayedTracks = await GetMostPlayedtracks(token); //sarasas dainu kurias displayint
+            Console.WriteLine("test");
             return Page();
         }
 

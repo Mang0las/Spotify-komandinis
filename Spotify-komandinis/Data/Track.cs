@@ -8,16 +8,16 @@ namespace Spotify_komandinis
     public class Track
     {
         public string album { get; set; }
-        public List<Artist> artists { get; set; }
+        public string artist { get; set; }
         public string id { get; set; }
         public string name { get; set; }
         public int popularity { get; set; }
         public string uri { get; set; }
 
-        public Track(string album, List<Artist> artists, string id, string name, int popularity, string uri)
+        public Track(string album, string artist, string id, string name, int popularity, string uri)
         {
             this.album = album;
-            this.artists = artists;
+            this.artist = artist;
             this.id = id;
             this.name = name;
             this.popularity = popularity;

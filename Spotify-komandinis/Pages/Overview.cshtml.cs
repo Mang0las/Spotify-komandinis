@@ -11,6 +11,7 @@ namespace Spotify_komandinis
     public class OverviewModel : PageModel
     {
         public List<Track> trackList = new List<Track>();
+        public List<Artist> artistList = new List<Artist>();
 
         public async Task<IActionResult> OnGetAsync()
         {  
@@ -18,6 +19,8 @@ namespace Spotify_komandinis
             //Console.WriteLine(test.Result.Items.Length);
             var mostPlayedTracks = await GetMostPlayedtracks(token); //sarasas dainu kurias displayint
             trackList = PutTracksIntoList(mostPlayedTracks);
+            var mostPlayedArtists = await GetMostPlayedArtists(token);
+            artistList = PutArtistsIntoList(mostPlayedArtists);
             Console.WriteLine("test");
             return Page();
         }
@@ -35,6 +38,15 @@ namespace Spotify_komandinis
             var tracks = await personal.GetUsersTopTracks(10, timeRange: TimeRange.LongTerm);
 
             return tracks;
+        }
+
+        public async Task<PagedArtists> GetMostPlayedArtists(string access_token)
+        {
+            var http = new HttpClient();
+            var personal = new PersonalizationApi(http, access_token);
+            var artists = await personal.GetUsersTopArtists(10, timeRange: TimeRange.LongTerm);
+
+            return artists;
         }
 
         public List<Track> PutTracksIntoList(PagedTracks tracks)

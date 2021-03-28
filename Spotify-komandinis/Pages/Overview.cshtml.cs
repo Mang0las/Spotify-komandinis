@@ -10,37 +10,56 @@ namespace Spotify_komandinis
 {
     public class OverviewModel : PageModel
     {
-        public List<Track> trackList = new List<Track>();
-        public List<Artist> artistList = new List<Artist>();
+        public List<Track> trackListShort = new List<Track>();
+        public List<Track> trackListMedium = new List<Track>();
+        public List<Track> trackListLong = new List<Track>();
+
+        public List<Artist> artistListShort = new List<Artist>();
+        public List<Artist> artistListMedium = new List<Artist>();
+        public List<Artist> artistListLong = new List<Artist>();
+
+
         public List<Track> recommendationList = new List<Track>();
 
         public async Task<IActionResult> OnGetAsync()
         {  
             string token = (string)TempData["access_token"];
-            var mostPlayedTracks = await GetMostPlayedtracks(token);
-            trackList = PutTracksIntoList(mostPlayedTracks);
-            var mostPlayedArtists = await GetMostPlayedArtists(token);
-            artistList = PutArtistsIntoList(mostPlayedArtists);
+
+            var mostPlayedTracksShort = await GetMostPlayedtracks(token, TimeRange.ShortTerm);
+            trackListShort = PutTracksIntoList(mostPlayedTracksShort);
+            var mostPlayedTracksMedium = await GetMostPlayedtracks(token, TimeRange.MediumTerm);
+            trackListMedium = PutTracksIntoList(mostPlayedTracksMedium);
+            var mostPlayedTracksLong = await GetMostPlayedtracks(token, TimeRange.LongTerm);
+            trackListLong = PutTracksIntoList(mostPlayedTracksLong);
+
+            var mostPlayedArtistsShort = await GetMostPlayedArtists(token,TimeRange.ShortTerm);
+            artistListShort = PutArtistsIntoList(mostPlayedArtistsShort);
+            var mostPlayedArtistsMedium = await GetMostPlayedArtists(token, TimeRange.MediumTerm);
+            artistListMedium = PutArtistsIntoList(mostPlayedArtistsMedium);
+            var mostPlayedArtistsLong = await GetMostPlayedArtists(token, TimeRange.LongTerm);
+            artistListLong = PutArtistsIntoList(mostPlayedArtistsLong);
+
             var recommendedTracks = await GetTrackRecommendations(token);
-            recommendationList = PutRecommendationsIntoList(recommendedTracks);
+                recommendationList = PutRecommendationsIntoList(recommendedTracks);
+
             Console.WriteLine("test");
             return Page();
         }
 
-        public async Task<PagedTracks> GetMostPlayedtracks(string access_token)
+        public async Task<PagedTracks> GetMostPlayedtracks(string access_token, TimeRange timeRange = TimeRange.LongTerm)
         {
             var http = new HttpClient();
             var personal = new PersonalizationApi(http, access_token);
-            var tracks = await personal.GetUsersTopTracks(10, timeRange: TimeRange.LongTerm);
+            var tracks = await personal.GetUsersTopTracks(10, timeRange : timeRange);
 
             return tracks;
         }
 
-        public async Task<PagedArtists> GetMostPlayedArtists(string access_token)
+        public async Task<PagedArtists> GetMostPlayedArtists(string access_token, TimeRange timeRange=TimeRange.LongTerm)
         {
             var http = new HttpClient();
             var personal = new PersonalizationApi(http, access_token);
-            var artists = await personal.GetUsersTopArtists(10, timeRange: TimeRange.LongTerm);
+            var artists = await personal.GetUsersTopArtists(10, timeRange: timeRange);
 
             return artists;
         }
@@ -49,8 +68,8 @@ namespace Spotify_komandinis
         {
             var http = new HttpClient();
             var browse = new BrowseApi(http, access_token);
-            string id1 = artistList[0].id;
-            string id2 = artistList[1].id;
+            string id1 = artistListLong[0].id;
+            string id2 = artistListLong[1].id;
             RecommendationsResult result = await browse.GetRecommendations(new[] { id1, id2 }, null, null);
             return result;
         }

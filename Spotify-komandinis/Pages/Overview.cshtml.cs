@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Http.Extensions;
-using System.Net.Http;
 using SpotifyApi.NetCore;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Spotify_komandinis
 {
@@ -15,7 +13,7 @@ namespace Spotify_komandinis
         public List<Track> trackList = new List<Track>();
 
         public async Task<IActionResult> OnGetAsync()
-        {
+        {  
             string token = (string)TempData["access_token"];
             //Console.WriteLine(test.Result.Items.Length);
             var mostPlayedTracks = await GetMostPlayedtracks(token); //sarasas dainu kurias displayint
@@ -24,19 +22,23 @@ namespace Spotify_komandinis
             return Page();
         }
 
+        //public async Task<IActionResult> OnPostAsync()
+        //{
+            
+        //    return Page();
+        //}
+
         public async Task<PagedTracks> GetMostPlayedtracks(string access_token)
         {
             var http = new HttpClient();
             var personal = new PersonalizationApi(http, access_token);
-            var tracks = await personal.GetUsersTopTracks(10,timeRange:TimeRange.LongTerm);
-
-            //var tracks = new List<Track>();
+            var tracks = await personal.GetUsersTopTracks(10, timeRange: TimeRange.LongTerm);
 
             return tracks;
         }
 
-       public List<Track> PutTracksIntoList(PagedTracks tracks)
-       {
+        public List<Track> PutTracksIntoList(PagedTracks tracks)
+        {
             List<Track> trackList = new List<Track>();
             //List<Artist> artistList = new List<Artist>();
 
@@ -67,7 +69,7 @@ namespace Spotify_komandinis
             }
 
             return trackList;
-       }
+        }
 
     }
 }

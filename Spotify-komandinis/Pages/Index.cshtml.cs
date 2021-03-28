@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Extensions;
 
 
 namespace Spotify_komandinis
@@ -23,7 +20,7 @@ namespace Spotify_komandinis
             _logger = logger;
         }
 
-        
+
         public IActionResult OnGet()
         {
             var authorisation = new Auth();

@@ -1,15 +1,17 @@
-﻿namespace Spotify_komandinis
+﻿using System.Collections.Generic;
+
+namespace Spotify_komandinis
 {
     public class Track
     {
         public string album { get; set; }
-        public string artist { get; set; }
+        public List<Artist> artist { get; set; }
         public string id { get; set; }
         public string name { get; set; }
         public int popularity { get; set; }
         public string uri { get; set; }
 
-        public Track(string album, string artist, string id, string name, int popularity, string uri)
+        public Track(string album, List<Artist> artist, string id, string name, int popularity, string uri)
         {
             this.album = album;
             this.artist = artist;

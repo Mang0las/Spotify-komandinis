@@ -45,31 +45,28 @@ namespace Spotify_komandinis
         public List<Track> PutTracksIntoList(PagedTracks tracks)
         {
             List<Track> trackList = new List<Track>();
-            //List<Artist> artistList = new List<Artist>();
+            
 
             for (int i = 0; i < tracks.Items.Length; i++)
             {
+                List<Artist> artistList = new List<Artist>();
                 string album = tracks.Items[i].Album.Name;
 
-                //artistList.Clear();
+                for (int j = 0; j < tracks.Items[i].Artists.Length; j++)
+                {
+                    string artistid = tracks.Items[i].Artists[j].Id;
+                    string artistname = tracks.Items[i].Artists[j].Name;
+                    Artist artist = new Artist(artistid, artistname);
+                    artistList.Add(artist);
+                }
 
-                //for (int j = 0; j < tracks.Items[i].Artists.Length; j++)
-                //{
-                //    string artistid = tracks.Items[i].Artists[j].Id;
-                //    string artistname = tracks.Items[i].Artists[j].Name;
-                //    Artist artist = new Artist(artistid, artistname);
-                //    artistList.Add(artist);
-                //}
-
-
-                //List<Artist> artists = artistList;
-                string artist = tracks.Items[i].Artists[0].Name;
+                List<Artist> artists = artistList;
                 string id = tracks.Items[i].Id;
                 string name = tracks.Items[i].Name;
                 int popularity = tracks.Items[i].Popularity;
                 string uri = tracks.Items[i].Uri;
 
-                Track track = new Track(album, artist, id, name, popularity, uri);
+                Track track = new Track(album, artists, id, name, popularity, uri);
                 trackList.Add(track);
             }
 

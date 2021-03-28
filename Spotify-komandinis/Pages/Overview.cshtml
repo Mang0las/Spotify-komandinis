@@ -45,43 +45,49 @@
             }
         </tbody>
     </table>
-    <table class="table table-light table-striped table-hover" style="display:none" id="artists" runat="server">
-        <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <table class="table table-light table-striped table-hover" style="display:none" id="artists" runat="server">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            @foreach (Artist artist in Model.artistList)
-            {
-                <tr>
-                    <td>@artist.name</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    @section Scripts{
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>
+                    @foreach (Artist artist in Model.artistList)
+                    {
+                        <tr>
+                            <td>@artist.name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </div>
+        </div>
+        @section Scripts{
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script>
 
-            //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
-            $(document).ready(function () {
+                //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
+                $(document).ready(function () {
 
-                $("#display-button").click(function () {
-                    var choice = document.getElementById("selection").value;
-                    if (choice == 1)
-                        $("#artists").toggle();
-                    if (choice == 2)
-                        $("#tracks").toggle();
+                    $("#display-button").click(function () {
+                        $("#artist").hide();
+                        $("tracks").hide();
+                        var choice = document.getElementById("selection").value;
+                        if (choice == 1)
+                            $("#artists").show();
+                        if (choice == 2)
+                            $("#tracks").show();
+                    });
+
+                    $("#logout-button").click(function () {
+                        window.location.href = "/Index";
+                    });
+
                 });
+            </script>
+        }
 
-                $("#logout-button").click(function () {
-                    window.location.href = "/Index";
-                });
-
-            });
-        </script>
-    }
-
-}   
+        }

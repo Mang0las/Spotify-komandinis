@@ -6,7 +6,7 @@
     <div class="text-center">
         <p>Prisijungimas sekmingas!</p>
 
-    </div><div class="text-center">
+    </div><div class="text-sm-right">
         <button id="logout-button" class="btn btn-primary">Log out</button>
     </div>
     <div>
@@ -54,7 +54,7 @@
 
     </table>
 
-    <table class="table table-light table-striped table-hover" style="display:none" id="tracks" runat="server">
+    <table class="table table-light table-striped table-hover" style="display:none" id="recommendations" runat="server">
         <thead>
             <tr>
                 <th>Album</th>
@@ -70,7 +70,7 @@
             {
                 <tr>
                     <td>@Model.recommendationList[i].album</td>
-                    <td>@Model.recommendationList[i].ReturnArtist(i, Model.trackList) </td>
+                    <td>@Model.recommendationList[i].ReturnArtist(1, Model.trackList) </td>
                     <td>@Model.recommendationList[i].name</td>
                     <td>@Model.recommendationList[i].popularity</td>
                     <td><iframe src="https://open.spotify.com/embed/track/@Model.recommendationList[i].id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
@@ -110,11 +110,15 @@
                 $("#display-button").click(function () {
                     $("#artists").hide();
                     $("#tracks").hide();
+                    $("recommendations").hide();
                     var choice = document.getElementById("selection").value;
                     if (choice == 1)
                         $("#artists").show();
                     if (choice == 2)
                         $("#tracks").show();
+                    if (choice == 3)
+                        $("#recommendations").show();
+
                 });
 
                 $("#logout-button").click(function () {

@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SpotifyApi.NetCore;
 using System;
 using System.Collections.Generic;
@@ -8,20 +10,66 @@ using System.Threading.Tasks;
 
 namespace Spotify_komandinis
 {
+    [BindProperties]
     public class OverviewModel : PageModel
     {
         public List<Track> trackList = new List<Track>();
         public List<Artist> artistList = new List<Artist>();
+        public string accessToken;
+        public bool generateTable;
+        [BindProperty(SupportsGet = true)]
+        public string? range { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string? displaySelection { get; set; }
+        public List<SelectListItem> rangeSelections { get; set; }
+        public List<SelectListItem> displaySelections { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
-        {  
+
+        public IActionResult OnGet()
+        {
+
+            PopulateSelectionLists();
+
+            generateTable = false;
             string token = (string)TempData["access_token"];
+            this.HttpContext.Session.SetString("access_token", token);
+            //var mostPlayedTracks = await GetMostPlayedtracks(token); //sarasas dainu kurias displayint
+            //trackList = PutTracksIntoList(mostPlayedTracks);
+            //var mostPlayedArtists = await GetMostPlayedArtists(token);
+            //artistList = PutArtistsIntoList(mostPlayedArtists);
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            PopulateSelectionLists();
+
+            var timeRangeSelection = Request.Form["menuRange"];
+            string token = this.HttpContext.Session.GetString("access_token");
             var mostPlayedTracks = await GetMostPlayedtracks(token); //sarasas dainu kurias displayint
             trackList = PutTracksIntoList(mostPlayedTracks);
             var mostPlayedArtists = await GetMostPlayedArtists(token);
             artistList = PutArtistsIntoList(mostPlayedArtists);
-            Console.WriteLine("test");
+                var selectiontest = Request.Form["displaySelection"];
+            generateTable = true;
             return Page();
+
+        }
+
+        public void PopulateSelectionLists()
+        {
+            rangeSelections = new List<SelectListItem>
+            {
+                new SelectListItem {Value = "1", Text = "4 weeks"},
+                new SelectListItem {Value = "2", Text = "6 months"},
+                new SelectListItem {Value = "3", Text = "All time"}
+            };
+            displaySelections = new List<SelectListItem>
+            {
+                new SelectListItem {Value = "1", Text = "Artists"},
+                new SelectListItem {Value = "2", Text = "Tracks"},
+                new SelectListItem {Value = "3", Text = "Recommended"}
+            };
         }
 
         public async Task<PagedTracks> GetMostPlayedtracks(string access_token)

@@ -32,7 +32,7 @@ namespace Spotify_komandinis
             query.Add("redirect_uri", authorisation.redirectURL);
             query.Add("state", state);
             query.Add("scope", "user-top-read");
-            query.Add("show_dialog", "true");
+            query.Add("show_dialog", "false");
             TempData["state"] = state;
             parameters = query.ToQueryString().ToString();
 

@@ -20,7 +20,7 @@
 
           </div>
 
-<table class="table table-light table-striped table-hover">
+<table class="table table-light table-striped table-hover" style="display:none" id="tracks" runat="server">
     <thead>
         <tr>
             <th>Album</th>
@@ -46,12 +46,20 @@
         </tbody>
     </table>
     @section Scripts{
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>
+
             //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
             $(document).ready(function () {
+
+                $("#display-button").click(function () {
+                    $("#tracks").toggle();
+                });
+
                 $("#logout-button").click(function () {
                     window.location.href = "/Index";
                 });
+
             });
         </script>
     }

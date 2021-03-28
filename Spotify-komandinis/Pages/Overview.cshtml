@@ -10,11 +10,11 @@
         <button id="logout-button" class="btn btn-primary">Log out</button>
     </div>
     <div>
-        <select name="menuType">
+        <select name="menuType" id="selection">
             <option value="">Select what you want to see</option>
-            <option value="1">artists</option>
-            <option value="2">tracks</option>
-            <option value="3">Three</option>
+            <option value="1">Artists</option>
+            <option value="2">Tracks</option>
+            <option value="3">Recommended</option>
         </select>
         <button id="display-button" class="btn btn-primary">Display</button>
 
@@ -45,7 +45,7 @@
             }
         </tbody>
     </table>
-    <table class="table table-light table-striped table-hover" style="display:none" id="tracks" runat="server">
+    <table class="table table-light table-striped table-hover" style="display:none" id="artists" runat="server">
         <thead>
             <tr>
                 <th>Name</th>
@@ -69,7 +69,11 @@
             $(document).ready(function () {
 
                 $("#display-button").click(function () {
-                    $("#tracks").toggle();
+                    var choice = document.getElementById("selection").value;
+                    if (choice == 1)
+                        $("#artists").toggle();
+                    if (choice == 2)
+                        $("#tracks").toggle();
                 });
 
                 $("#logout-button").click(function () {

@@ -9,23 +9,23 @@
     </div><div class="text-center">
         <button id="logout-button" class="btn btn-primary">Log out</button>
     </div>
-          <div>
-              <select class="custom-select" style="width:27%" name="menuType" id="selection">
-                  <option value="">Select what you want to see</option>
-                  <option value="1">Artists</option>
-                  <option value="2">Tracks</option>
-                  <option value="3">Recommended</option>
-              </select>
-              <select class="custom-select" style="width:27%" name="menuRange" id="range_selection">
-                  <option value="">Select time range</option>
-                  <option value="1">4 weeks</option>
-                  <option value="2">6 months</option>
-                  <option value="3">All time</option>
-              </select>
-              <button id="display-button" class="btn btn-primary">Display</button>
+    <div>
+        <select class="custom-select" style="width:27%" name="menuType" id="selection">
+            <option value="">Select what you want to see</option>
+            <option value="1">Artists</option>
+            <option value="2">Tracks</option>
+            <option value="3">Recommended</option>
+        </select>
+        <select class="custom-select" style="width:27%" name="menuRange" id="range_selection">
+            <option value="">Select time range</option>
+            <option value="1">4 weeks</option>
+            <option value="2">6 months</option>
+            <option value="3">All time</option>
+        </select>
+        <button id="display-button" class="btn btn-primary">Display</button>
 
 
-          </div>
+    </div>
 
     <table class="table table-light table-striped table-hover" style="display:none" id="tracks" runat="server">
         <thead>
@@ -41,17 +41,45 @@
 
             @for (int i = 0; i < Model.trackList.Count; i++)
             {
+                <tr>
+                    <td>@Model.trackList[i].album</td>
+                    <td>@Model.trackList[i].ReturnArtist(i, Model.trackList) </td>
+                    <td>@Model.trackList[i].name</td>
+                    <td>@Model.trackList[i].popularity</td>
+                    <td><iframe src="https://open.spotify.com/embed/track/@Model.trackList[i].id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+
+    <table class="table table-light table-striped table-hover" style="display:none" id="tracks" runat="server">
+        <thead>
             <tr>
-                <td>@Model.trackList[i].album</td>
-                <td>@Model.trackList[i].ReturnArtist(i, Model.trackList) </td>
-                <td>@Model.trackList[i].name</td>
-                <td>@Model.trackList[i].popularity</td>
-                <td><iframe src="https://open.spotify.com/embed/track/@Model.trackList[i].id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+                <th>Album</th>
+                <th>Artist</th>
+                <th>Name</th>
+                <th>Popularity</th>
+                <th>Listen</th>
             </tr>
+        </thead>
+        <tbody>
+
+            @for (int i = 0; i < Model.recommendationList.Count; i++)
+            {
+                <tr>
+                    <td>@Model.recommendationList[i].album</td>
+                    <td>@Model.recommendationList[i].ReturnArtist(i, Model.trackList) </td>
+                    <td>@Model.recommendationList[i].name</td>
+                    <td>@Model.recommendationList[i].popularity</td>
+                    <td><iframe src="https://open.spotify.com/embed/track/@Model.recommendationList[i].id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+                </tr>
 
             }
         </tbody>
     </table>
+
     <div class="row justify-content-center">
         <div class="col-4">
             <table class="table table-light table-striped table-hover" style="display:none" id="artists" runat="server">
@@ -70,31 +98,31 @@
                     }
                 </tbody>
             </table>
-            </div>
         </div>
-        @section Scripts{
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script>
+    </div>
+    @section Scripts{
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
 
-                //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
-                $(document).ready(function () {
+            //login button kuris redirectina i spotify ir grazina koda kartu su URL i /Callback
+            $(document).ready(function () {
 
-                    $("#display-button").click(function () {
-                        $("#artists").hide();
-                        $("#tracks").hide();
-                        var choice = document.getElementById("selection").value;
-                        if (choice == 1)
-                            $("#artists").show();
-                        if (choice == 2)
-                            $("#tracks").show();
-                    });
-
-                    $("#logout-button").click(function () {
-                        window.location.href = "/Index";
-                    });
-
+                $("#display-button").click(function () {
+                    $("#artists").hide();
+                    $("#tracks").hide();
+                    var choice = document.getElementById("selection").value;
+                    if (choice == 1)
+                        $("#artists").show();
+                    if (choice == 2)
+                        $("#tracks").show();
                 });
-            </script>
-        }
 
-        }
+                $("#logout-button").click(function () {
+                    window.location.href = "/Index";
+                });
+
+            });
+        </script>
+    }
+
+}

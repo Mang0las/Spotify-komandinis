@@ -12,14 +12,17 @@ namespace Spotify_komandinis
     {
         public List<Track> trackList = new List<Track>();
         public List<Artist> artistList = new List<Artist>();
+        public List<Track> recommendationList = new List<Track>();
 
         public async Task<IActionResult> OnGetAsync()
         {  
             string token = (string)TempData["access_token"];
-            var mostPlayedTracks = await GetMostPlayedtracks(token); //sarasas dainu kurias displayint
+            var mostPlayedTracks = await GetMostPlayedtracks(token);
             trackList = PutTracksIntoList(mostPlayedTracks);
             var mostPlayedArtists = await GetMostPlayedArtists(token);
             artistList = PutArtistsIntoList(mostPlayedArtists);
+            var recommendedTracks = await GetTrackRecommendations(token);
+            recommendationList = PutRecommendationsIntoList(recommendedTracks);
             Console.WriteLine("test");
             return Page();
         }
@@ -42,11 +45,20 @@ namespace Spotify_komandinis
             return artists;
         }
 
+        public async Task<RecommendationsResult> GetTrackRecommendations(string access_token)
+        {
+            var http = new HttpClient();
+            var browse = new BrowseApi(http, access_token);
+            string id1 = artistList[0].id;
+            string id2 = artistList[1].id;
+            RecommendationsResult result = await browse.GetRecommendations(new[] { id1, id2 }, null, null);
+            return result;
+        }
+
         public List<Track> PutTracksIntoList(PagedTracks tracks)
         {
             List<Track> trackList = new List<Track>();
             
-
             for (int i = 0; i < tracks.Items.Length; i++)
             {
                 List<Artist> artistList = new List<Artist>();
@@ -84,6 +96,36 @@ namespace Spotify_komandinis
                 artistList.Add(artist);
             }
             return artistList;
+        }
+
+        public List<Track> PutRecommendationsIntoList(RecommendationsResult tracks)
+        {
+            List<Track> trackList1 = new List<Track>();
+
+            for (int i = 0; i < tracks.Tracks.Length; i++)
+            {
+                List<Artist> artistList = new List<Artist>();
+                string album = tracks.Tracks[i].Album.Name;
+
+                for (int j = 0; j < tracks.Tracks[i].Artists.Length; j++)
+                {
+                    string artistid = tracks.Tracks[i].Artists[j].Id;
+                    string artistname = tracks.Tracks[i].Artists[j].Name;
+                    Artist artist = new Artist(artistid, artistname);
+                    artistList.Add(artist);
+                }
+
+                List<Artist> artists = artistList;
+                string id = tracks.Tracks[i].Id;
+                string name = tracks.Tracks[i].Name;
+                int popularity = tracks.Tracks[i].Popularity;
+                string uri = tracks.Tracks[i].Uri;
+
+                Track track = new Track(album, artists, id, name, popularity, uri);
+                trackList1.Add(track);
+            }
+
+            return trackList1;
         }
     }
 }

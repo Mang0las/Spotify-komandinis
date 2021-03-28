@@ -71,5 +71,18 @@ namespace Spotify_komandinis
             return trackList;
         }
 
+        public List<Artist> PutArtistsIntoList(PagedArtists artists)
+        {
+            List<Artist> artistList = new List<Artist>();
+            for (int i = 0; i < artists.Items.Length; i++)
+            {
+                string id = artists.Items[i].Id;
+                string name = artists.Items[i].Name;
+                Artist artist = new Artist(id, name);
+                artistList.Add(artist);
+            }
+            return artistList;
+        }
+
     }
 }

@@ -85,6 +85,5 @@ namespace Spotify_komandinis
             }
             return artistList;
         }
-
     }
 }

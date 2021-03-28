@@ -32,15 +32,15 @@
         </thead>
         <tbody>
 
-            @foreach (Track track in Model.trackList)
+            @for (int i = 0; i < Model.trackList.Count; i++)
             {
-                <tr>
-                    <td>@track.album</td>
-                    <td>@track.artist</td>
-                    <td>@track.name</td>
-                    <td>@track.popularity</td>
-                    <td><iframe src="https://open.spotify.com/embed/track/@track.id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
-                </tr>
+            <tr>
+                <td>@Model.trackList[i].album</td>
+                <td>@Model.trackList[i].ReturnArtist(i, Model.trackList) </td>
+                <td>@Model.trackList[i].name</td>
+                <td>@Model.trackList[i].popularity</td>
+                <td><iframe src="https://open.spotify.com/embed/track/@Model.trackList[i].id" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></td>
+            </tr>
 
             }
         </tbody>

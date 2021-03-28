@@ -20,5 +20,18 @@ namespace Spotify_komandinis
             this.popularity = popularity;
             this.uri = uri;
         }
+
+        public string ReturnArtist(int index, List<Track> trackList)
+        {
+            string line = "";
+            for (int i = 0; i < trackList[index].artist.Count; i++)
+            {
+                if(i + 1 == trackList[index].artist.Count)
+                    line += artist[i].name;
+                else
+                    line += artist[i].name + ", ";
+            }
+            return line;
+        }
     }
 }

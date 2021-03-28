@@ -9,16 +9,23 @@
     </div><div class="text-center">
         <button id="logout-button" class="btn btn-primary">Log out</button>
     </div>
-    <div>
-        <select class="custom-select" style="width:27%" name="menuType" id="selection">
-            <option value="">Select what you want to see</option>
-            <option value="1">Artists</option>
-            <option value="2">Tracks</option>
-            <option value="3">Recommended</option>
-        </select>
-        <button id="display-button" class="btn btn-primary">Display</button>
+          <div>
+              <select class="custom-select" style="width:27%" name="menuType" id="selection">
+                  <option value="">Select what you want to see</option>
+                  <option value="1">Artists</option>
+                  <option value="2">Tracks</option>
+                  <option value="3">Recommended</option>
+              </select>
+              <select class="custom-select" style="width:27%" name="menuRange" id="range_selection">
+                  <option value="">Select time range</option>
+                  <option value="1">4 weeks</option>
+                  <option value="2">6 months</option>
+                  <option value="3">All time</option>
+              </select>
+              <button id="display-button" class="btn btn-primary">Display</button>
 
-    </div>
+
+          </div>
 
     <table class="table table-light table-striped table-hover" style="display:none" id="tracks" runat="server">
         <thead>

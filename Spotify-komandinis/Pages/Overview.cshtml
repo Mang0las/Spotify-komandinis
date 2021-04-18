@@ -186,7 +186,14 @@
             </table>
         </div>
     </div>
+    <div class="text-sm-right">
+    <button id="convert" class="btn btn-light">
+        Export your results
+    </button>
+     </div>
+    
     @section Scripts{
+        <script src="tableExport.jquery.plugin/html2canvas.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>
 
@@ -229,6 +236,12 @@
                 });
 
             });
+            function downloadPDFWithBrowserPrint() {
+                window.print();
+            }
+            document.querySelector('#convert').addEventListener('click', downloadPDFWithBrowserPrint);
+
+
         </script>
     }
 

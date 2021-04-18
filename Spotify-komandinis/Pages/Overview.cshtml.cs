@@ -10,6 +10,8 @@ namespace Spotify_komandinis
 {
     public class OverviewModel : PageModel
     {
+        
+
         public List<Track> trackListShort = new List<Track>();
         public List<Track> trackListMedium = new List<Track>();
         public List<Track> trackListLong = new List<Track>();
@@ -23,6 +25,7 @@ namespace Spotify_komandinis
 
         public async Task<IActionResult> OnGetAsync()
         {  
+
             string token = (string)TempData["access_token"];
 
             var mostPlayedTracksShort = await GetMostPlayedtracks(token, TimeRange.ShortTerm);
@@ -45,6 +48,11 @@ namespace Spotify_komandinis
             Console.WriteLine("test");
             return Page();
         }   
+
+        public async Task<IActionResult> OnPostAsync()
+        { 
+            return Page();
+        }
 
         public async Task<PagedTracks> GetMostPlayedtracks(string access_token, TimeRange timeRange = TimeRange.LongTerm)
         {

@@ -9,9 +9,9 @@
 </head>
 <body style="background-color:lightslategray">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3" style="background-color:dimgray">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Spotify Helper    </a>
+                <a class="navbar-brand" style="color:lightgreen; font-family:Arial, Helvetica, sans-serif; text-decoration:" asp-area="" asp-page="/Index"><b>Spotify Helper</b>    </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
+    </div>  
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

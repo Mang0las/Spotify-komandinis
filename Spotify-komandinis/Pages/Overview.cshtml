@@ -3,6 +3,7 @@
 @{
 
 
+
     <div class="text-center">
 
     </div><div class="text-sm-right">
@@ -24,13 +25,13 @@
         <button id="display-button" class="btn btn-light" style="margin-bottom: 10px; margin-top: 10px">Display</button>
     </div>
 
-    <table class="table table-light table-striped table-hover" style="display:none" id="tracksShort" runat="server">
+    <table class="table table-light table-striped table-hover" style="display:none" id="tracksShort" runat="server" data-toggle="table">
         <thead>
             <tr>
-                <th>Album</th>
-                <th>Artist</th>
-                <th>Name</th>
-                <th>Popularity</th>
+                <th data-field="album" data-sortable="true">Album</th>
+                <th data-field="artist" data-sortable="true">Artist</th>
+                <th data-field="name" data-sortable="true">Name</th>
+                <th data-field="popularity" data-sortable="true">Popularity</th>
                 <th>Listen</th>
             </tr>
         </thead>
@@ -51,13 +52,13 @@
 
     </table>
 
-    <table class="table table-light table-striped table-hover" style="display:none" id="tracksMedium" runat="server">
+    <table class="table table-light table-striped table-hover" style="display:none" id="tracksMedium" runat="server"  data-toggle="table">
         <thead>
             <tr>
-                <th>Album</th>
-                <th>Artist</th>
-                <th>Name</th>
-                <th>Popularity</th>
+                <th data-field="album" data-sortable="true">Album</th>
+                <th data-field="artist" data-sortable="true">Artist</th>
+                <th data-field="name" data-sortable="true">Name</th>
+                <th data-field="popularity" data-sortable="true">Popularity</th>
                 <th>Listen</th>
             </tr>
         </thead>
@@ -78,14 +79,14 @@
 
     </table>
 
-    <table class="table table-light table-striped table-hover" style="display:none" id="tracksLong" runat="server">
+    <table class="table table-light table-striped table-hover" style="display:none" id="tracksLong" runat="server" data-toggle="table">
         <thead>
             <tr>
-                <th>Album</th>
-                <th>Artist</th>
-                <th>Name</th>
-                <th>Popularity</th>
-                <th>Listen</th>
+                <th data-field="album" data-sortable="true">Album</th>
+                <th data-field="artist" data-sortable="true">Artist</th>
+                <th data-field="name" data-sortable="true">Name</th>
+                <th data-field="popularity" data-sortable="true">Popularity</th>
+                <th data-field="album" data-sortable="true">Listen</th>
             </tr>
         </thead>
         <tbody>
@@ -104,13 +105,13 @@
         </tbody>
 
     </table>
-    <table class="table table-light table-striped table-hover" style="display:none" id="recommendations" runat="server">
+    <table class="table table-light table-striped table-hover" style="display:none" id="recommendations" runat="server" data-toggle="table">
         <thead>
             <tr>
-                <th>Album</th>
-                <th>Artist</th>
-                <th>Name</th>
-                <th>Popularity</th>
+                <th data-field="album" data-sortable="true">Album</th>
+                <th data-field="artist" data-sortable="true">Artist</th>
+                <th data-field="name" data-sortable="true">Name</th>
+                <th data-field="popularity" data-sortable="true">Popularity</th>
                 <th>Listen</th>
             </tr>
         </thead>
@@ -132,10 +133,10 @@
 
     <div class="row justify-content-center">
         <div class="col-4">
-            <table class="table table-light table-striped table-hover" style="display:none" id="artistsShort" runat="server">
+            <table class="table table-light table-striped table-hover" style="display:none" id="artistsShort" runat="server" data-toggle="table">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th data-field="name" data-sortable="true">Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -149,10 +150,10 @@
                 </tbody>
             </table>
 
-            <table class="table table-light table-striped table-hover" style="display:none" id="artistsMedium" runat="server">
+            <table class="table table-light table-striped table-hover" style="display:none" id="artistsMedium" runat="server" data-toggle="table">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th data-field="name" data-sortable="true">Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -166,10 +167,10 @@
                 </tbody>
             </table>
 
-            <table class="table table-light table-striped table-hover" style="display:none" id="artistsLong" runat="server">
+            <table class="table table-light table-striped table-hover" style="display:none" id="artistsLong" runat="server" data-toggle="table">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th data-field="name" data-sortable="true">Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -185,12 +186,15 @@
         </div>
     </div>
     <div class="text-sm-right">
-    <button id="convert" class="btn btn-light">
-        Export your results
-    </button>
-     </div>
-    
+        <button id="convert" class="btn btn-light">
+            Export your results
+        </button>
+    </div>
+
     @section Scripts{
+        <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+
+        <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
         <script src="tableExport.jquery.plugin/html2canvas.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>
